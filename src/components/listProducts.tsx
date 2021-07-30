@@ -1,14 +1,23 @@
+import { useEffect } from 'react';
 import { connect, } from 'react-redux';
+
+import api from "../services/api";
 
 import * as ProductActions from '../store/products/actions';
 import { IProduct, IProductState } from '../store/products/types';
 
 interface IListProductsProps {
   products: IProduct[],
-  toogleProduct(product: IProduct): any,
+  toogleProduct(product: IProduct): void,
+  getProducts(): void,
 }
 
-const ListProducts = ({ products, toogleProduct }: IListProductsProps) => {
+const ListProducts = ({ products, toogleProduct, getProducts }: IListProductsProps) => {
+
+  useEffect(() => {
+    getProducts()
+  }, [getProducts])
+
   return (
     <div>
       <div>
@@ -30,7 +39,8 @@ const mapStateToProps = (state: IProductState) => ({
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  toogleProduct: (product: IProduct) => dispatch(ProductActions.toogleProduct(product))
+  toogleProduct: (product: IProduct) => dispatch(ProductActions.toogleProduct(product)),
+  getProducts: () => dispatch(ProductActions.getProducts())
 })
 
 // conecta ao state e depois ao component

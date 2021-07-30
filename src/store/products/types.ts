@@ -1,5 +1,6 @@
 export enum IProductTypes {
   TOOGLE_PRODUCT = 'TOOGLE_PRODUCT',
+  SET_PRODUCTS = 'SET_PRODUCTS',
 }
 
 export interface IProduct {
